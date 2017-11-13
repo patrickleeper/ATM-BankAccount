@@ -10,8 +10,8 @@
       private Container contentPane; 
       private JTextArea outArea;
       private JTextField inField;
-      private JButton numbersButton;
-      private JButton optionsButton;
+      private JButton numbersButton[];
+      private JButton optionsButton[];
       private JComboBox accountBox;
               
        public ATMGUI(String title) 
@@ -73,13 +73,18 @@
          centerPanel = new JPanel();
          numbersPanel = new JPanel();
          optionsPanel = new JPanel();
-         numbersButton = new JButton("Test 1");
-         optionsButton = new JButton("Test 2");
          
-         numbersPanel.add(numbersButton);
-         numbersPanel.setLayout(new GridLayout(3,4));
+         numbersButton = new JButton[10];
+         for (int i=0; i<10; i++)
+         {
+            numbersButton[i] = new JButton(Integer.toString(i));
+            numbersPanel.add(numbersButton[i]);
+         }
+         numbersPanel.setLayout(new GridLayout(4,3));
          
-         optionsPanel.add(optionsButton);
+         optionsButton = new JButton[4];                
+                  
+         //optionsPanel.add(optionsButton[]);
          optionsPanel.setLayout(new BoxLayout(optionsPanel,BoxLayout.Y_AXIS));
          optionsPanel.add(Box.createRigidArea(new Dimension(0,20)));
          
