@@ -9,10 +9,9 @@ import javax.swing.*;
       
       public BankAccount()
       {
-         int number = accountNumber;
-         int pin = accountPIN;
-         double balance = accountBalance;
-         
+         accountNumber = 0;
+         accountPIN = 0;
+         accountBalance = 0.00;
          return;
       }
       
@@ -27,41 +26,52 @@ import javax.swing.*;
       
       public void setAccountNumber(int number)
       {
-         
+         accountNumber = number;
          return;
       }
       
       public void setAccountPIN(int pin)
       {
-         
+         accountPIN = pin;
          return;
       }
       
       public void setAccountBalance(double balance)
       {
-         
+         accountBalance = balance;
          return;
       }
       
       public int getAccountNumber()
       {
-         return number;
+         return accountNumber;
       }
       
       public double getAccountBalance()
       {
-         return balance;
+         return accountBalance;
       }
       
       public boolean verifyPIN(int pin)
       {
-         
-         return pin;   
+         boolean verifyPIN;
+      
+         if(this.accountPIN == pin)
+         {
+            verifyPIN = true;
+            System.out.println("That was the correct PIN");
+         }
+         else
+         {
+            verifyPIN = false;
+            System.out.println("That was not the correct PIN");
+         }
+         return verifyPIN;   
       }
       
-      public void withdrawFunds()
+      public void withdrawFunds(int wFunds)
       {
-         
+         this.accountBalance -= wFunds;
       }
          
    }
