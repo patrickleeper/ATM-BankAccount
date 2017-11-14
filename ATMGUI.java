@@ -11,7 +11,10 @@
       private JTextArea outArea;
       private JTextField inField;
       private JButton numbersButton[];
-      private JButton optionsButton[];
+      private JButton enterOptionButton;
+      private JButton balanceOptionButton;
+      private JButton withdrawOptionButton;
+      private JButton doneOptionButton;
       private JComboBox accountBox;
               
        public ATMGUI(String title) 
@@ -82,12 +85,20 @@
          }
          numbersPanel.setLayout(new GridLayout(4,3));
          
-         optionsButton = new JButton[4];                
+         enterOptionButton = new JButton("Enter");
+         balanceOptionButton = new JButton("Balance");
+         withdrawOptionButton = new JButton("Withdraw");
+         doneOptionButton = new JButton("Done");                         
                   
-         //optionsPanel.add(optionsButton[]);
+         optionsPanel.add(enterOptionButton);
+         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
+         optionsPanel.add(balanceOptionButton);
+         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
+         optionsPanel.add(withdrawOptionButton);
+         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
+         optionsPanel.add(doneOptionButton);
          optionsPanel.setLayout(new BoxLayout(optionsPanel,BoxLayout.Y_AXIS));
-         optionsPanel.add(Box.createRigidArea(new Dimension(0,20)));
-         
+                  
          centerPanel.add(numbersPanel);
          centerPanel.add(optionsPanel);
          
