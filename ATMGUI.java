@@ -81,8 +81,18 @@
          for (int i=0; i<10; i++)
          {
             numbersButton[i] = new JButton(Integer.toString(i));
-            numbersPanel.add(numbersButton[i]);
          }
+         numbersPanel.add(numbersButton[1]);
+         numbersPanel.add(numbersButton[2]);
+         numbersPanel.add(numbersButton[3]);
+         numbersPanel.add(numbersButton[4]);
+         numbersPanel.add(numbersButton[5]);
+         numbersPanel.add(numbersButton[6]);
+         numbersPanel.add(numbersButton[7]);
+         numbersPanel.add(numbersButton[8]);
+         numbersPanel.add(numbersButton[9]);
+         numbersPanel.add(Box.createRigidArea(new Dimension(5,0)));
+         numbersPanel.add(numbersButton[0]);
          numbersPanel.setLayout(new GridLayout(4,3));
          
          enterOptionButton = new JButton("Enter");
@@ -90,8 +100,9 @@
          withdrawOptionButton = new JButton("Withdraw");
          doneOptionButton = new JButton("Done");                         
                   
+                  
          optionsPanel.add(enterOptionButton);
-         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
+         optionsPanel.add(Box.createRigidArea(new Dimension(,5)));
          optionsPanel.add(balanceOptionButton);
          optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
          optionsPanel.add(withdrawOptionButton);
