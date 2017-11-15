@@ -1,3 +1,14 @@
+/*
+Patrick Leeper
+Aaron Miller
+Homework/Lab #5
+Due Date: 11/15/17
+leeper@psu.edu
+agm5262@psu.edu
+BankAccount.java
+
+The purpose is use getters, setters, verify PINs, withdraw funds.
+*/
 import javax.swing.*;		
    
     public class BankAccount 
@@ -59,7 +70,7 @@ import javax.swing.*;
          if(this.accountPIN == pin)
          {
             verifyPIN = true;
-            System.out.println("That was the correct PIN");
+            System.out.println("That was the correct. PIN was " + pin);
          }
          else
          {
@@ -69,9 +80,10 @@ import javax.swing.*;
          return verifyPIN;   
       }
       
-      public void withdrawFunds(int wFunds)
+      public double withdrawFunds(int wf)
       {
-         this.accountBalance -= wFunds;
+         accountBalance = accountBalance - wf;
+         return accountBalance;
       }
          
    }
