@@ -17,9 +17,12 @@
       private JButton doneOptionButton;
       private JComboBox accountBox;
       private final static int NBUTTONS = 12;
-      private String labels[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "0", " "};
+      private final static int OBUTTONS = 4;
+      private String nlabels[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "0", " "};
+      private String olabels[] = {"Enter", "Balance", "Withdraw", "Done"};
       private String acctNumbers[] = {"1000", "2000", "3000", "4000", "5000"};
       private JButton buttons[];
+      private JButton obuttons[];
               
        public ATMGUI(String title) 
       {
@@ -77,26 +80,33 @@
          JPanel numbersPanel;
          JPanel optionsPanel;
          
-         buttons = new JButton[NBUTTONS];         
+         buttons = new JButton[NBUTTONS]; 
+         obuttons = new JButton[OBUTTONS];        
          centerPanel = new JPanel();
          numbersPanel = new JPanel();
          optionsPanel = new JPanel();
          
-         numbersButton = new JButton[10];
          for (int i=0; i < buttons.length; i++)
          {
-            buttons[i] = new JButton(labels[i]);
+            buttons[i] = new JButton(nlabels[i]);
             buttons[i].addActionListener(this);
             numbersPanel.add(buttons[i]);
          }
         
+         for (int i=0; i < obuttons.length; i++)
+         {
+            obuttons[i] = new JButton(olabels[i]);
+            obuttons[i].addActionListener(this);
+            optionsPanel.add(obuttons[i]);
+         }
+         
          numbersPanel.add(Box.createRigidArea(new Dimension(5,0)));
          numbersPanel.setLayout(new GridLayout(5,4));
          
-         enterOptionButton = new JButton("Enter");
+         /*enterOptionButton = new JButton("Enter");
          balanceOptionButton = new JButton("Balance");
          withdrawOptionButton = new JButton("Withdraw");
-         doneOptionButton = new JButton("Done");                         
+         doneOptionButton = new JButton("Done");                        
                   
                   
          optionsPanel.add(enterOptionButton);
@@ -105,7 +115,8 @@
          optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
          optionsPanel.add(withdrawOptionButton);
          optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
-         optionsPanel.add(doneOptionButton);
+         optionsPanel.add(doneOptionButton);*/
+         
          optionsPanel.setLayout(new BoxLayout(optionsPanel,BoxLayout.Y_AXIS));
                   
          centerPanel.add(numbersPanel);
