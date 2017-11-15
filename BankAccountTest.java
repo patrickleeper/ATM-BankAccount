@@ -22,7 +22,10 @@ public class BankAccountTest
       System.out.println(accounts[i].getAccountBalance());
    }
    
-   //
+   System.out.println("\n");
+   System.out.println(accounts[0].getAccountNumber());
+   System.out.println(accounts[0].verifyPIN(uPIN));
+   System.out.println(accounts[0].getAccountBalance());  
    
    }
 }   
