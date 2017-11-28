@@ -20,9 +20,10 @@
       private final static int OBUTTONS = 4;
       private String nlabels[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "0", " "};
       private String olabels[] = {"Enter", "Balance", "Withdraw", "Done"};
-      private String acctNumbers[] = {"1000", "2000", "3000", "4000", "5000"};
+    //  private String acctNumbers[] = {"1000", "2000", "3000", "4000", "5000"};
       private JButton buttons[];
       private JButton obuttons[];
+
               
        public ATMGUI(String title) 
       {
@@ -127,15 +128,16 @@
          return;
       } // end buildCenterPanel
    
-       private void buildSouthPanel()   // builds south panel where user will enter their guesses
+       private void buildSouthPanel()   // builds south panel where user will select their account
       {
          JPanel southPanel;			
          JLabel accountLabel;
       
          southPanel = new JPanel();   
          accountLabel = new JLabel("Account Number: ");  // lookup these
-         accountBox = new JComboBox(acctNumbers);
+         accountBox = new JComboBox();
          accountBox.setMaximumRowCount(3);
+         loadAccounts();
          
          southPanel.add(accountLabel);
          southPanel.add(accountBox);                            
@@ -145,8 +147,29 @@
          return;
       } // end buildSouthPanel
       
+      
+            
+      private void loadAccounts()
+      {
+         BankAccount[] accounts = new BankAccount[5];
+         String accountNumber[] = new String[5];
+         for (int i=0; i<accountNumber.length; i++)
+         { 
+            double defaultBalance = 500.75;         
+            accounts[i] = new BankAccount((1000 + 1000 * i), 9999 - i, defaultBalance + 500.34 * i);
+            accountNumber[i] = String.valueOf(accounts[i].getAccountNumber());
+            accountBox.addItem(accountNumber[i]);
+         }
+
+         
+         return;
+      }
+      
+      
       public void actionPerformed(ActionEvent e)  
       {
+      
+         
          
          return;
       }// end action preformed	
