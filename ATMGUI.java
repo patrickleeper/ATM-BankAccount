@@ -1,157 +1,153 @@
+// ATM Example
+// ATMGUI.java
+
+//*******************************************************
+// program used to build a screen showing a msg area,
+// input area, numbered keypad, vertical column of buttons,
+// and an account dropdown box.
+//********************************************************
+
+
    import javax.swing.*;
    import java.awt.*;    // container class located
-   import java.awt.event.*;  // actionListener interface.
+   import java.awt.event.*;  // actionListener interface
 
-//
-// ATMGUI Class used to define the JFrame and set up the actionlister feature
-//
     public class ATMGUI extends JFrame implements ActionListener
    {
-      private Container contentPane; 
-      private JTextArea outArea;
-      private JTextField inField;
-      private JButton numbersButton[];
-      private JButton enterOptionButton;
-      private JButton balanceOptionButton;
-      private JButton withdrawOptionButton;
-      private JButton doneOptionButton;
+      private Container contentPane;
+	  private final static int NBUTTONS = 12;
+      private JPanel northJPanel = new JPanel();
+      private JPanel northDisplayJPanel = new JPanel();
+      private JPanel northEnterJPanel = new JPanel();
+      private JPanel southJPanel = new JPanel();
       private JComboBox accountBox;
-      private final static int NBUTTONS = 12;
-      private final static int OBUTTONS = 4;
-      private String nlabels[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""};
-      private String olabels[] = {"Enter", "Balance", "Withdraw", "Done"};
-    //  private String acctNumbers[] = {"1000", "2000", "3000", "4000", "5000"};
+      private JPanel eastButtonJPanel = new JPanel();
+      private JPanel buttonJPanel = new JPanel();
+      private JPanel keyPadJPanel = new JPanel(); 
+      private JLabel prompt = new JLabel("Account Number:        ");
+      //private JTextField inField = new JTextField(6);
+      private JTextField enterField = new JTextField(15);
+      private JTextArea display = new JTextArea(5,30);
+      private JButton enterButton = new JButton   ("<html><font size=4>Enter</font></html>");  
+      private JButton balanceButton = new JButton ("<html><font size=4>Balance</font></html>");
+      private JButton withDrawButton = new JButton("<html><font size=4>Withdraw</font></html>");    
+      private JButton doneButton = new JButton    ("<html><font size=4>Done</font></html>");
       private JButton buttons[];
-      private JButton obuttons[];
-
-              
-       public ATMGUI(String title) 
+      private String labels[] =
+      {"1","2","3",
+         "4","5","6",
+         "7","8","9",
+         " ","0"," "};				
+  
+ //---------------GUI----------------------------------------------------------        
+   	  public ATMGUI(String title) 
       {
          buildGUI();
-         setLocation(200,150); // position window on screen (x,y)
+		 setLocation(200,150); // position window on screen (x,y)
          setTitle(title);
          setSize(600,500);  // width, height
          setVisible(true);  // makes the GUI appear in the window
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits JFRAME APPL.
       						 // uses a qualified name for a class constant
       
-      } // GuessTheNumberGUI 
-   
-   
-       private void buildGUI()		// designed to build the contentpane with panels
+      } // end ATMAppletGUI
+   // builds the necesary panels
+       private void buildGUI()
       {
          contentPane = getContentPane();
-         buildNorthPanel();
+		 buildNorthPanel();
          buildCenterPanel();
          buildSouthPanel();
-         return;
-      
-      } // end buildGUI()
-   
-       private void buildNorthPanel()	
-      {                                
-         JPanel northPanel;
-         JPanel nPanel;			
-         JPanel sPanel;    
-          
-      
-         northPanel = new JPanel(); // instantiation
-         nPanel = new JPanel();        
-         sPanel = new JPanel(); 
-         outArea = new JTextArea(10,40);
-         inField = new JTextField(5);
-         outArea.setText("Please choose your account number.");
-         outArea.setEditable(false);
-         inField.setEditable(false);                            
-      
-         nPanel.add(outArea);
-         sPanel.add(inField);
-         northPanel.add(nPanel);
-         northPanel.add(sPanel);
-         northPanel.setLayout(new BoxLayout(northPanel,BoxLayout.Y_AXIS));      
-      
-         contentPane.add("North", northPanel); // adding input panel to north area
       
          return;
-      } // end buildNorthPanel()
-   
-       private void buildCenterPanel()   
+      }// end buildGUI
+      
+		 // routine that builds a north panel and adds display to it
+       private void buildNorthPanel()
       {
-         JPanel centerPanel;
-         JPanel numbersPanel;
-         JPanel optionsPanel;
-         
-         buttons = new JButton[NBUTTONS]; 
-         obuttons = new JButton[OBUTTONS];        
-         centerPanel = new JPanel();
-         numbersPanel = new JPanel();
-         optionsPanel = new JPanel();
-         
-         for (int i=0; i < buttons.length; i++)
-         {
-            buttons[i] = new JButton(nlabels[i]);
-            buttons[i].setEnabled(false);
-            buttons[i].addActionListener(this);
-            numbersPanel.add(buttons[i]);
-         }
-        
-         for (int i=0; i < obuttons.length; i++)
-         {
-            obuttons[i] = new JButton(olabels[i]);
-            obuttons[i].setEnabled(false);
-            obuttons[i].addActionListener(this);
-            optionsPanel.add(obuttons[i]);
-         }
-         
-         numbersPanel.add(Box.createRigidArea(new Dimension(5,0)));
-         numbersPanel.setLayout(new GridLayout(5,4));
-         
-         /*enterOptionButton = new JButton("Enter");
-         balanceOptionButton = new JButton("Balance");
-         withdrawOptionButton = new JButton("Withdraw");
-         doneOptionButton = new JButton("Done");                        
-                  
-                  
-         optionsPanel.add(enterOptionButton);
-         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
-         optionsPanel.add(balanceOptionButton);
-         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
-         optionsPanel.add(withdrawOptionButton);
-         optionsPanel.add(Box.createRigidArea(new Dimension(0,5)));
-         optionsPanel.add(doneOptionButton);*/
-         
-         optionsPanel.setLayout(new BoxLayout(optionsPanel,BoxLayout.Y_AXIS));
-                  
-         centerPanel.add(numbersPanel);
-         centerPanel.add(optionsPanel);
-         
-         contentPane.add("Center", centerPanel); 
-               
+         northJPanel.setLayout(new BorderLayout(0,0));
+         northDisplayJPanel.add(Box.createRigidArea(new Dimension(0,100)));
+         northDisplayJPanel.add(display);
+         northJPanel.add("North",northDisplayJPanel);
+      
+         display.setEditable(false);
+         northEnterJPanel.add(enterField);
+         northJPanel.add("South",northEnterJPanel);
+         enterField.setEditable(false);
+			
+         add("North",northJPanel);
+         display.append("Please select your account number");
          return;
-      } // end buildCenterPanel
-   
+      }// end buildNorthPanel
+         	
+
+		
+   	  // builds center panel and adds several buttons along with an array of buttons
+       private void buildCenterPanel()
+      {
+         buttonJPanel.add(Box.createRigidArea(new Dimension(20,250)));
+         keyPadJPanel.setLayout(new GridLayout(4,3,0,0));
+         buttons = new JButton[NBUTTONS];
+         for (int k=0; k < buttons.length; k++)
+         {
+            buttons[k] = new JButton(labels[k]);
+            buttons[k].addActionListener(this);
+            keyPadJPanel.add(buttons[k]);
+         } // end for
+               	
+            buttonJPanel.add(keyPadJPanel,"Center");
+         
+            eastButtonJPanel.setLayout(new BoxLayout(eastButtonJPanel,BoxLayout.Y_AXIS));
+            eastButtonJPanel.add(Box.createRigidArea(new Dimension(25,0)));
+            
+            enterButton.setEnabled(false);
+            balanceButton.setEnabled(false);
+            withDrawButton.setEnabled(false);
+            
+            eastButtonJPanel.add(enterButton);
+            enterButton.addActionListener(this);
+            eastButtonJPanel.add(Box.createRigidArea(new Dimension(0,5)));
+            
+            eastButtonJPanel.add(balanceButton);
+            balanceButton.addActionListener(this);
+            eastButtonJPanel.add(Box.createRigidArea(new Dimension(0,5)));
+            
+            eastButtonJPanel.add(withDrawButton);
+            withDrawButton.addActionListener(this);
+            eastButtonJPanel.add(Box.createRigidArea(new Dimension(0,5)));
+            
+            eastButtonJPanel.add(doneButton);
+            doneButton.addActionListener(this);
+            eastButtonJPanel.add(Box.createRigidArea(new Dimension(0,5)));      
+         
+            buttonJPanel.add("East",eastButtonJPanel); 
+         
+            add("Center",buttonJPanel);
+         return;
+      }// end buildCenterPanel
+         	
        private void buildSouthPanel()   // builds south panel where user will select their account
       {
-         JPanel southPanel;			
-         JLabel accountLabel;
+         //JPanel southPanel;			
+         //JLabel accountLabel;
       
-         southPanel = new JPanel();   
-         accountLabel = new JLabel("Account Number: ");  // lookup these
+         //southPanel = new JPanel();   
+         //accountLabel = new JLabel("Account Number: ");  // lookup these
          accountBox = new JComboBox();
          accountBox.setMaximumRowCount(3);
          
          loadAccounts();
          accountBox.addActionListener(this);
          
-         southPanel.add(accountLabel);
-         southPanel.add(accountBox);                            
+         southJPanel.add(prompt);
+         southJPanel.add(accountBox);                            
       
-         contentPane.add("South", southPanel); // adding input panel to north area
+         contentPane.add("South", southJPanel); // adding input panel to north area
       
          return;
-      } // end buildSouthPanel
-      
-      
+      } // end buildSouthPanel      
+ //---------------END GUI-------------------------------------------------------    
+
       private void loadAccounts()
       {
          BankAccount[] accounts = new BankAccount[5];
@@ -165,7 +161,7 @@
          }
          
          return;
-      }
+      }//end loadAccounts
       
    
             
@@ -193,30 +189,31 @@
          return;
       }*/
       
-      
+ //---------------ACTION PERFORMED-----------------------------------------------     
       public void actionPerformed(ActionEvent e)  
       {
          String accountNumberString;
          if(e.getSource() == accountBox)
          {
               accountBox.setEnabled(false);
-              outArea.setText("");
+              display.setText("");
               enableKeypad();
-              obuttons[3].setEnabled(true);
-              outArea.setText("Please type in your PIN number.");
+              doneButton.setEnabled(true);
+              display.setText("Please type in your PIN number.");
               accountNumberString = String.valueOf(accountBox.getSelectedItem());
-         }
+         }//end ComboBox ActionPerformed
          else
          {       
                String keyLabel = ((JButton)e.getSource()).getText();
                zeroToNineJButtonActionPerformed(keyLabel);
-               obuttons[0].setEnabled(true);                       
-         }
+               enterButton.setEnabled(true);                       
+         }//end Key Pad ActionPerformed
          
          
          return;
-      }// end action preformed	
-      
+      }	
+ //---------------END ACTION PERFORMED-----------------------------------------------     
+     
       private void enableKeypad()
       {
            for (int i=0; i < buttons.length; i++)
@@ -225,7 +222,7 @@
          }
          
          return;
-      }
+      }//end enabledKeypad
       
       private void disableKeypad()
       {
@@ -235,15 +232,15 @@
          }
          
          return;
-      }
+      }//end disabledKeypad
       
       private void zeroToNineJButtonActionPerformed(String num)
       {
          String userPin = num;
-         inField.setText(inField.getText() + num);
+         enterField.setText(enterField.getText() + num);
          
          return;
-      }
+      }//end zeroToNineJButtonActionPerformed
 
       
       

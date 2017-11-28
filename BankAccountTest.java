@@ -1,87 +1,124 @@
-/*
-Patrick Leeper
-Aaron Miller
-Homework/Lab #5
-Due Date: 11/15/17
-leeper@psu.edu
-agm5262@psu.edu
-BankAccountTest.java
-
-The purpose is to test of the BankAccount.java. 
-It makes bank accounts, PINs, and balances. 
-Then it prompts to withdraw funds from the first two bank accounts. 
-Lastly, it lets the user change PIN for the first two accounts.
-*/
-import java.util.Scanner;
+import java.util.*;
+import java.text.DecimalFormat;
 
 public class BankAccountTest
 {
-   public static void main(String[] args)
-   {
-   Scanner in = new Scanner(System.in);
-   
-   //Prompt user to enter PIN
-   
-   
-   double defaultBalance = 500.75;
-   BankAccount[] accounts = new BankAccount[5];
-   
-   //Loop array of Objects for BankAccount
-   for(int i = 0; i < accounts.length; i++)
-   {
-      accounts[i] = new BankAccount((1000 + 1000 * i), 9999 - i, defaultBalance + 500.34 * i);
-   }
-   //Display array of Objects for BankAccount
-   for(int i = 0; i < accounts.length; i++)
-   {
-       
-      System.out.println(accounts[i].getAccountNumber());
-      //Prompt user to enter PIN
-      System.out.println("Input PIN: ");
-      int uPIN = in.nextInt();
-      System.out.println("");
-      System.out.println(accounts[i].verifyPIN(uPIN));
-      System.out.println(accounts[i].getAccountBalance());
-      System.out.println("----------");
-   }
-   //Display Single BankAccount object *Dont think this is right*
-   System.out.println("----------");
-   
-   System.out.println(accounts[0].getAccountNumber());
-   //Prompt user to enter PIN
-       System.out.println("Input PIN: ");
-       int uPIN = in.nextInt();
-       System.out.println("");
-   System.out.println(accounts[0].verifyPIN(uPIN));
-   System.out.println(accounts[0].getAccountBalance()); 
-   System.out.println("----------\n");
-      
-   //Withdraw funds from two accounts     
-   int wf = 0;
-   for(int i = 0; i < 2; i++)
-   {
-      System.out.println("Enter a withdraw amount from the first and second account");
-      int inputWD = in.nextInt();
-   
-      if(inputWD > accounts[i].getAccountBalance())
-      {
-   
-      System.out.println("That will go into the negatives");
-      }
-      else
-      {
-      System.out.println("The new balance is " + accounts[i].withdrawFunds(inputWD));
-      }   
-   }
-   //Reassign values
-     
-   for(int i = 0; i < 2; i++)
-   {
-   System.out.println("\n\nPlease enter new pin for account "+ accounts[i].getAccountNumber());
-   int cPIN = in.nextInt();
-   accounts[i].setAccountPIN(cPIN);
-   System.out.println("Your new pin is: " + cPIN);
-   }
-   
-   }
-}   
+	private static final int NACCOUNTS = 5;
+
+	public static void main(String args[])
+	{
+	
+		Scanner sc = new Scanner(System.in);
+						
+	// 1. Create Array of BankAccount Objects
+		BankAccount[] accounts;
+	    accounts = new BankAccount[NACCOUNTS];
+		int accountNumber = 1000;
+		int accountPIN = 9999;
+		double accountBalance = 500.75;
+		DecimalFormat df = new DecimalFormat("#.##");
+		
+		for(int i=0;i<accounts.length;i++)
+		{
+				accounts[i] = new BankAccount(accountNumber,accountPIN, accountBalance);
+				accountNumber += 1000;
+				accountPIN -= 1;
+				accountBalance += 500.34;
+		}
+			
+	// 2. Create Single BankAccount Object
+	BankAccount singleAccount = new BankAccount();
+		
+	// 3. Using Loop, display account numbers and balances and verify PINs (array of BankAcount objects)
+	for(int i=0;i<accounts.length;i++)
+	{
+		System.out.println("Account Number: " + accounts[i].getAccountNumber()+ " Balance: " +  df.format(accounts[i].getAccountBalance())+ "\n");
+		System.out.println("Please Enter Your pin-number");
+		int pin_Num = sc.nextInt();
+		
+		if(accounts[i].verifyPIN(pin_Num) == true)
+		{
+			System.out.println("PIN number correct!\n");
+		}
+		
+		else
+		{
+			System.out.println("PIN number incorrect!\n");			
+			
+		}
+			
+	}
+	// 4. Display default account number and balance and verify PIN (single BankAccount object)
+		System.out.println("\nSingle BankAccount Object\n");
+		System.out.println("Account Number: " + singleAccount.getAccountNumber()+ " Balance: " +  df.format(singleAccount.getAccountBalance())+ "\n");
+		System.out.println("Please Enter Your pin-number");
+		int pin_Num = sc.nextInt();
+		
+		if(singleAccount.verifyPIN(pin_Num) == true)
+		{
+			System.out.println("PIN number correct!\n");
+		}
+		
+		else
+		{
+			System.out.println("PIN number incorrect!\n");			
+		}
+	
+	// 5. Withdraw Funds from two accounts (array of objects and single object)
+	System.out.println("Account "+accounts[2].getAccountNumber() + " has a balance of $" + df.format(accounts[2].getAccountBalance()));
+	System.out.println("Enter the Amount to be Withdrawn: ");
+	double withdrawAmount = sc.nextDouble();
+	accounts[2].withdrawFunds(withdrawAmount);
+	System.out.println("Account " + accounts[2].getAccountNumber() + " now has a balance of $" + df.format(accounts[2].getAccountBalance()));
+	
+	System.out.println("Account " + singleAccount.getAccountNumber()+" has a balance of $" + df.format(singleAccount.getAccountBalance()));
+	System.out.println("Enter the Amount to be Withdrawn: ");
+	withdrawAmount = sc.nextDouble();
+	if (withdrawAmount > singleAccount.getAccountBalance())
+	{
+		System.out.println("Insufficient funds");
+	}
+	else
+	{
+		singleAccount.withdrawFunds(withdrawAmount);
+		System.out.println("Account "+singleAccount.getAccountNumber()+" has a balance of $"+df.format(singleAccount.getAccountBalance()));
+	}
+
+	// 6. Reassign values using setters (array of objects & single object)
+	accounts[1].setAccountNumber(1);
+	accounts[1].setAccountPIN(1);
+	accounts[1].setAccountBalance(1);
+	System.out.println("Array object");
+	System.out.println("Account: " + accounts[1].getAccountNumber() + " Balance: " + accounts[1].getAccountBalance());
+	System.out.println("Please Enter Your pin-number");
+	pin_Num = sc.nextInt();
+	
+	if(accounts[1].verifyPIN(pin_Num) == true)
+	{
+			System.out.println("PIN number correct!\n");
+	}
+	else
+	{
+			System.out.println("PIN number incorrect!\n");			
+	}
+		
+	singleAccount.setAccountNumber(2);
+	singleAccount.setAccountPIN(2);
+	singleAccount.setAccountBalance(2);
+	System.out.println("Single object");
+	System.out.println("Account: " + singleAccount.getAccountNumber() + " Balance: " + singleAccount.getAccountBalance());
+	System.out.println("Please Enter Your pin-number");
+	pin_Num = sc.nextInt();
+	
+	if(singleAccount.verifyPIN(pin_Num) == true)
+		{
+			System.out.println("PIN number correct!\n");
+		}
+		
+		else
+		{
+			System.out.println("PIN number incorrect!\n");			
+		}
+
+	}
+}
