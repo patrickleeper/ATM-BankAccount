@@ -201,13 +201,60 @@
               doneButton.setEnabled(true);
               display.setText("Please type in your PIN number.");
               accountNumberString = String.valueOf(accountBox.getSelectedItem());
-         }//end ComboBox ActionPerformed
+         }//end ComboBox AP
+         
+         else if(e.getSource() == balanceButton)
+         {
+               display.setText("Test 1.");  
+         }//end Balance Button AP
+         
+         else if(e.getSource() == withDrawButton)
+         {
+               display.setText("Test 2.");  
+         }//end Withdraw Button AP
+         
+         else if(e.getSource() == doneButton)
+         {
+               resetGUI();  
+         }//end Withdraw Button AP
+         
+         else if(e.getSource() == enterButton)
+         {
+            //int p = Integer.parseInt(accountNumberString.toString());
+            enterField.setText("");
+            display.setText("Test enter");
+            /*loop through bank account array, get the account number of the
+             bank account object and compare to the accountNumber*/
+
+/*
+            if(accountNumber == bankAccount[k].getAccountNumber())
+            {
+               if(bankAccount[k].verifyPIN(Integer.parseInt(userPin)))
+               {
+               display.setText("");
+               enterField.setText("");
+               enterButton.setEnabled(false);
+               disableKeypad();
+               balanceButton.setEnabled(true);
+               withDrawButton.setEnabled(true);
+               display.setText("Welcome to ATM Banking.");
+               }
+               else
+               {
+               enterField.setText("");
+               //set userPIN = ""
+               display.setText("PIN is incorrect. Please re-enter PIN");
+               }
+            }
+ */            
+         }//end Enter Button AP
+         
          else
          {       
                String keyLabel = ((JButton)e.getSource()).getText();
                zeroToNineJButtonActionPerformed(keyLabel);
                enterButton.setEnabled(true);                       
-         }//end Key Pad ActionPerformed
+         }//end Key Pad AP
          
          
          return;
@@ -242,6 +289,16 @@
          return;
       }//end zeroToNineJButtonActionPerformed
 
+     private void resetGUI() // doneButton is the reset button
+     {
+         display.setText("");
+         enterField.setText("");
+         enterButton.setEnabled(false);
+         balanceButton.setEnabled(false);
+         accountBox.setEnabled(true);
+         disableKeypad();
+         return;
+     }
       
       
    }
