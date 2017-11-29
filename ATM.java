@@ -15,10 +15,7 @@ public class ATM
 	{
 		ATMGUI atm;
 	
-		atm = new ATMGUI("Welcome to the ATM");
-		//JPanel guiPanel; //needs to be JPanel because of called class
-	   // guiPanel = new ATMAppletGUI();
-		//getContentPane().add(guiPanel);
+		atm = new ATMGUI("Welcome to Krypto!");
 
 	}// end main
 	
