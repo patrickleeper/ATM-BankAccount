@@ -1,3 +1,6 @@
+// Aaron Miller(agm5262@psu.edu) and Patrick Leeper(leeper@psu.edu)
+// Lab/Homework 6
+// Due 11/29/17
 // BankAccount.java
 // purpose of class
 /**

@@ -1,5 +1,7 @@
-// ATMApplet
-// ATMApplet.java
+// Aaron Miller(agm5262@psu.edu) and Patrick Leeper(leeper@psu.edu)
+// Lab/Homework 6
+// Due 11/29/17
+// ATM.java
 
 // Original code to call the ATMGUI from an 
 // app (ATM).
@@ -15,7 +17,7 @@ public class ATM
 	{
 		ATMGUI atm;
 	
-		atm = new ATMGUI("Welcome to Krypto!");
+		atm = new ATMGUI("Welcome to the ATM");
 
 	}// end main
 	
